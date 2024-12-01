@@ -1,0 +1,11 @@
+<div class="sidebar"><h3>sidbar</h3>
+
+    {% for topic  in topics %}
+    <a href="">
+        <li>
+            <a href="{% url "search"%}?q={{topic.name}}">{{topic.name}}<span>({{topic.room_set.all.count}})</span></a>
+        </li>
+    </a>
+    {% endfor %}
+
+</div>

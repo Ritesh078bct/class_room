@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    create_room
+{% endblock %}
+
+
+{% block content %}
+<form action="{% url "create-room" %} " method="POST">
+{% csrf_token %}
+
+
+
+    <label for="topic">topic</label>
+    <input type="text" name="topic" list="topic-list" required/>
+    <datalist id="topic-list">
+        <select id="room-topic">
+            {% for topic in topics %}
+            <option value="python">{{topic.name}}</option>
+            {% endfor %}
+            {% comment %} <option value="django">django</option>
+            <option value="javascript">javascript</option> {% endcomment %}
+        </select>
+    </datalist>
+
+</br>
+</br>
+    <label for="room-name">
+        room-name
+    </label>
+    {% comment %} <input type="text" name="room-name" id="room-name" required> {% endcomment %}
+    {{form.name}}
+
+    <br>    
+    <br>    
+    <label for="description">description</label>
+    {% comment %} <textarea name="description" id="description" cols="30" rows="10" required></textarea> {% endcomment %}
+    {{form.description}}
+{% comment %} {{form.as_p}} {% endcomment %}
+{% comment %} {% for field in form  %}
+    <label for="{{field.label}}">{{field.label}}</label>
+    {{field}}
+    <br>
+    <br>
+{% endfor %} {% endcomment %}
+
+<button type="submit">submit</button>
+<a href="{% url "index" %}">back</a>
+</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+<h2>recent activity</h2>
+        {% for message in messages %}
+        <a href="{% url 'profile' message.user.id %}">
+                <h4>@{{message.user.username}}</h4>
+        </a>
+        <p>{{message.message}}</p>
+        <span>{{message.created_at|timesince}}</span>
+        <hr>
+        {% endfor %}

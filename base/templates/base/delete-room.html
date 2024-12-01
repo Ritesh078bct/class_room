@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}delete page{% endblock %}
+
+
+{% block content %}
+
+<form action="" method="POST">
+{% csrf_token %}
+
+<h2>are you sure!!</h2>
+
+<button type="submit">delete</button>
+<a href="{% url "index" %}">back</a>
+
+</form>
+
+{% endblock %}

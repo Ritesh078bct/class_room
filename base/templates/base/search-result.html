@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}
+allrooms
+{% endblock %}
+{% block content %}
+<style>
+    .container{
+        {% comment %} background-color:blue; {% endcomment %}
+        display:grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+<div class="container">
+    <div>
+        {% include "base/topic-component.html" %}
+    </div>
+    <div> 
+        <h4>total rooms:{{rooms.count}}</h4>
+        <a href="{% url "create-room" %}">
+        <button type="submit">create room</button>
+    </a>
+    <hr>
+        {% include "base/room-component.html" %}
+    </div>
+
+</div>
+
+{% endblock %}

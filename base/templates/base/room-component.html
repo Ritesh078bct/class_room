@@ -1,0 +1,25 @@
+{% for room in rooms %}
+{% if room.host == user %}
+    <a href="{%url "update-room" room.id%}" ><button>edit</button></a>
+    <a href="{%url "delete-room" room.id%}" ><button>delete</button></a>   
+{% endif %}
+<a href="{% url "profile" room.host.id %}">
+    <h4>host:{{room.host.username}}</h4>
+</a>
+<a href="{% url "room" room.id %}">
+    <h2>room_name:{{room.name}}</h4>
+</a>
+<h3>created: {{room.created_at|timesince}}, ago</h3>
+    <ul>
+        <li>Participants:</li>
+        <ul>
+            {% for participant in room.participants.all %}
+                <li>{{ participant.username }}</li>
+            {% empty %}
+                <li>No participants yet.</li>
+            {% endfor %}
+        </ul>
+    </ul>
+<h3>topic:{{room.topic}}</p>
+        <hr>
+{% endfor %}

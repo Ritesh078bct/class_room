@@ -1,0 +1,60 @@
+{% load static %}
+{% comment %} {% load static tailwind_tags %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}StudyTalk{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static "styles/style.css"%}">
+    {% comment %} {% tailwind_css %} {% endcomment %}
+</head>
+<body >
+    <nav class="bg-slate-700 text-white flex gap-2"> 
+        <span class="text-xl text-orange-600">studyTalk</span>
+   
+    
+    <form action="{% url 'search' %}" method="post" class=" ">
+        {% csrf_token %}
+
+        <input
+        class="outline-none h-8"
+        type="search"
+        placeholder="use roomname.."
+        name="search_query"
+        required aria-label="Search"
+     >
+     <button  type="submit">Search</button>
+    </form>
+    <a href="{% url "index" %}" class="bg-slate-400 rounded px-2">home</a>
+    {% if user.is_authenticated %}
+                <form action="{% url 'logout'%}" method="post" >
+                    {% csrf_token %}
+                    <button  type="submit" class="bg-red-600 rounded  px-2 pb-1">logOut</button>
+                </form>
+                {% if user.avatar%}
+                <img height="80" width="80" src="{{user.avatar.url}}" alt="avatar">
+                {% endif %}
+                <a href="{% url "profile" user.id %}">@{{user.username}}</a>
+                <a href="{% url "update-profile" %}">setting</a>
+    {% else %}
+                <a href="{% url "login" %}" class="bg-green-400 rounded px-2 pb-1"><button>login</button></a>
+                <a href="{% url "sign-up" %}" class="bg-teal-500 rounded px-2 pb-1"><button>signUP</button></a>
+    {% endif %} 
+                 
+
+
+                <hr>  
+            </nav>
+
+
+
+
+
+    {% block content %}
+    
+    {% endblock %}
+</body>
+</html>
